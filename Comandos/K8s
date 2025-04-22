@@ -1,0 +1,45 @@
+# Ver todos los recursos en un namespace
+kubectl get all -n <namespace>
+
+# Ver todos los pods en un namespace
+kubectl get pods -n <namespace>
+
+# Ver todos los deployments en un namespace
+kubectl get deployments -n <namespace>
+
+# Ver todos los servicios en un namespace
+kubectl get services -n <namespace>
+
+# Ver todos los ConfigMaps en un namespace
+kubectl get configmaps -n <namespace>
+
+# Ver detalles de un recurso específico
+kubectl describe <recurso> <nombre> -n <namespace>
+
+# Acceder a la terminal de un contenedor dentro de un pod
+kubectl exec -it <nombre-del-pod> -n <namespace> -- /bin/bash
+# O usar /bin/sh si bash no está instalado
+kubectl exec -it <nombre-del-pod> -n <namespace> -- /bin/sh
+
+
+# Crear/actualizar un ConfigMap usando un archivo local
+kubectl create configmap <nombre-del-configmap> \
+  --from-file=nginx.conf=<ruta-del-archivo> \
+  -n <namespace> --dry-run=client -o yaml | kubectl apply -f -
+
+# Ejemplo con Prometheus
+kubectl create configmap prometheus-config \
+  --from-file=prometheus.yml=/home/majog/prometheus.yml \
+  -n monitoring --dry-run=client -o yaml | kubectl apply -f -
+
+# Reiniciar un deployment (útil tras actualizar un ConfigMap o imagen)
+kubectl rollout restart deployment <nombre-del-deployment> -n <namespace>
+
+# Ejemplo con Prometheus
+kubectl rollout restart deployment prometheus -n monitoring
+
+# Eliminar un servicio del clúster
+kubectl delete service <nombre-del-servicio> -n <namespace>
+
+# Ejemplo
+kubectl delete service nginx-exporter -n default
