@@ -1,4 +1,4 @@
-# Ver todos los recursos en un namespace
+#Ver todos los recursos en un namespace
 kubectl get all -n <namespace>
 
 # Ver todos los pods en un namespace
