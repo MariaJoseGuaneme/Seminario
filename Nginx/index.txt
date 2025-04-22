@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Netflix con Docker</title>
+</head>
+<body>
+    <h1>A continuacion, los videitos:</h1>
+    <ul>
+        <li><a href="Soy Francesco Virgolini.mp4">Francescoo</a></li>
+        <li><a href="video4k.mp4">Elementos</a></li>
+    </ul>
+</body>
+</html>
