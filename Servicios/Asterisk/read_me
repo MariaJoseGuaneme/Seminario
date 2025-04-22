@@ -1,0 +1,28 @@
+# Asterisk - Servicio de Telefonía IP
+
+Este directorio forma parte del proyecto de seminario "Implementación de un Proveedor de Servicios de Internet (ISP)" y contiene la configuración del servicio de telefonía IP usando **Asterisk**.
+
+## Objetivo del servicio
+
+El objetivo de este componente es permitir la **realización de llamadas VoIP (voz sobre IP)** entre dispositivos conectados a la red del ISP, utilizando el protocolo **PJSIP**. Este servicio simula una central telefónica dentro de la infraestructura de red implementada.
+
+## Alcance de la implementación
+
+- Se utilizó **Asterisk** para registrar extensiones PJSIP.
+- Se configuraron varios endpoints SIP (softphones o teléfonos físicos) conectados desde diferentes VLAN o segmentos de red del ISP.
+- Las llamadas se realizan **de forma local dentro de la red**, sin necesidad de conexión a Internet o a una red PSTN externa.
+- No se incluye enrutamiento hacia operadores telefónicos tradicionales, ya que el enfoque es exclusivamente **educativo y de laboratorio**.
+
+## Archivos principales (contenedorizados posteriormente)
+
+- `pjsip.conf`: Configura los endpoints SIP (extensiones, contraseñas, transporte).
+- `extensions.conf`: Define el dialplan (reglas para el encaminamiento de llamadas).
+- `asterisk.conf`, `modules.conf`: Configuración general del sistema Asterisk.
+
+## Estado actual
+
+Actualmente Asterisk se encuentra configurado de forma básica en una máquina local y será contenerizado como parte del despliegue general con Docker y Kubernetes. La validación del servicio se ha realizado con éxito mediante llamadas entre dos dispositivos registrados con softphones.
+
+---
+
+Este módulo es parte clave del conjunto de servicios ofrecidos por el ISP simulado, junto con el sistema de video bajo demanda (Jellyfin), monitoreo (Grafana/Prometheus) y gestión de red (Mikrotik + VLANs).
