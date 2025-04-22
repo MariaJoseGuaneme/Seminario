@@ -1,2 +1,2 @@
 # Seminario
-Repositorio de archivos del seminario de ISP 
+Repositorio de archivos de configuración del seminario ISP 
