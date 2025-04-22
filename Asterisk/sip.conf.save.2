@@ -1,0 +1,53 @@
+[general]
+bindport=5060
+bindaddr=0.0.0.0
+nat=auto_force_rport,auto_comedia
+localnet=192.168.1.0/24  ; Ajusta esto según tu red WiFi (verifica con `ip a`)
+externaddr=192.168.1.70 ; Cambia por la IP de tu PC en la red WiFi
+disallow=all
+allow=ulaw
+allow=alaw
+language=es
+qualify=yes
+
+
+
+[authentication]
+[basic-options](!)                ; a template
+        dtmfmode=rfc2833
+        context=from-office
+        type=friend
+[natted-phone](!,basic-options)   ; another template inheriting basic-options
+        directmedia=no
+        host=dynamic
+[public-phone](!,basic-options)   ; another template inheriting basic-options
+        directmedia=yes
+[my-codecs](!)                    ; a template for my preferred codecs
+        disallow=all
+        allow=ilbc
+        allow=g729
+        allow=gsm
+        allow=g723
+        allow=ulaw
+[ulaw-phone](!)                   ; and another one for ulaw-only
+        disallow=all
+        allow=ulaw
+[usuario](!)
+type=friend
+host=dynamic
+context=interno
+disallow=all
+allow=ulaw
+allow=
+
+;Extension 101
+[ext101](usuario)
+username=uno
+secret=1718
+
+;Extension 102
+[ext102](usuario)
+username=dos
+secret=2526
+
+
