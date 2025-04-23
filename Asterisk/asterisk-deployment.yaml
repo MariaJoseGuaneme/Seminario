@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asterisk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: asterisk
+  template:
+    metadata:
+      labels:
+        app: asterisk
+    spec:
+      hostNetwork: true  # Para que Asterisk tenga red directa
+      containers:
+        - name: asterisk
+          image: majog/asterisk:v1
+          securityContext:
+            privileged: true  # Asegúrate de que esto sea necesario, ya que otorga permisos elevados
+          volumeMounts:
+            - name: asterisk-config
+              mountPath: /etc/asterisk
+          ports:
+            - containerPort: 5060  # SIP UDP
+            - containerPort: 5061  # SIP TCP
+            - containerPort: 5038  # AMI
+            - containerPort: 8088  # HTTP (opcional)
+            - containerPort: 10000 # RTP base
+            - containerPort: 10001
+            - containerPort: 10002
+            - containerPort: 10003
+            - containerPort: 10004
+            - containerPort: 10005
+            - containerPort: 10006
+            - containerPort: 10007
+      volumes:
+        - name: asterisk-config
+          hostPath:
+            path: /home/majog/Escritorio/asterisk-config  # Asegúrate de que la ruta esté correctamente configurada
+            type: Directory
