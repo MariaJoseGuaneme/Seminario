@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: majog/nginx:v1
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: videos
+          mountPath: /mnt/videos
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter:latest
+        args: 
+          - -nginx.scrape-uri=http://localhost/nginx_status
+        ports: 
+          - containerPort: 9113
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: videos
+        hostPath:
+          path: /home/majog/Escritorio/videosngnxdock
+          type: Directory
