@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin-exporter
+  labels:
+    app: jellyfin-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin-exporter
+  template:
+    metadata:
+      labels:
+        app: jellyfin-exporter
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: majog
+      containers:
+        - name: jellyfin-exporter
+          image: rebelcore/jellyfin-exporter:latest
+          args:
+            - --jellyfin.address=http://192.168.3.3:30096
+            - --jellyfin.token=9f60686960004c7a924522d8259eb76b
+          ports:
+            - containerPort: 9594
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin-exporter
+  labels:
+    app: jellyfin-exporter
+spec:
+  selector:
+    app: jellyfin-exporter
+  ports:
+    - protocol: TCP
+      port: 9594
+      targetPort: 9594
+  type: ClusterIP
