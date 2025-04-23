@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  labels:
+    app: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: majog  # Asegura que se ejecuta en el worker 'majog'
+      containers:
+      - name: jellyfin
+        image: majog/jellyfin:v1  # Tu imagen en Docker Hub
+        ports:
+        - containerPort: 8096
+        volumeMounts:
+        - name: jellyfin-config
+          mountPath: /config  # Montaje de configuración persistente
+        - name: media
+          mountPath: /media  # Directorio con tus archivos multimedia
+          
+      volumes:
+      - name: jellyfin-config
+        hostPath:
+          path: /home/majog/jellyfin-config  # Ruta en majog donde está system.xml
+          type: Directory
+      - name: media
+        hostPath:
+          path: /home/majog/Escritorio/videosjelly  # Ruta en majog con tus videos
+          type: Directory
