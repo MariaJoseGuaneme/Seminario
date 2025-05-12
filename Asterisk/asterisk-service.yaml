@@ -1,19 +1,19 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1               # Versión de la API de Kubernetes utilizada para este recurso (Service).
+kind: Service                # Tipo de recurso: en este caso, un Service, que expone un conjunto de Pods.
 metadata:
-  name: asterisk-service
+  name: asterisk-service     # Nombre del Service, se usará para referenciarlo dentro del clúster.
 spec:
   selector:
-    app: asterisk
+    app: asterisk              # Selecciona los Pods que tengan la etiqueta "app=asterisk". El tráfico será dirigido a ellos.
   ports:
-    - name: sip
-      protocol: UDP
-      port: 5060
-      targetPort: 5060
-      nodePort: 30060  # Para Linphone (externo)
-    - name: prometheus-metrics
-      protocol: TCP
-      port: 8089
-      targetPort: 8089
-      nodePort: 30002  # Para Prometheus (externo)
-  type: NodePort
+    - name: sip                # Nombre del primer puerto (opcional pero útil para identificar).
+      protocol: UDP            # Protocolo de red usado en este puerto (UDP para SIP).
+      port: 5060               # Puerto del Service (interno dentro del clúster) al que se accede.
+      targetPort: 5060         # Puerto del contenedor al que se redirige el tráfico.
+      nodePort: 30060          # Puerto expuesto en cada nodo del clúster para acceso externo (por ejemplo, Linphone).
+    - name: prometheus-metrics # Nombre del segundo puerto para monitoreo con Prometheus.
+      protocol: TCP            # Protocolo TCP, típico para HTTP/Prometheus.
+      port: 8089               # Puerto del Service dentro del clúster.
+      targetPort: 8089         # Puerto del contenedor donde están expuestas las métricas.
+      nodePort: 30002          # Puerto accesible externamente en los nodos para que Prometheus lo scrapee.
+  type: NodePort               # Tipo de Service. Expone los puertos especificados (nodePort) a través de todos los nodos del clúster.
