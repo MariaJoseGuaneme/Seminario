@@ -1,0 +1,37 @@
+# HELP asterisk_channels_count Current channel count.
+# TYPE asterisk_channels_count gauge
+asterisk_channels_count{eid="00:e0:4c:68:12:85"} 0
+# HELP asterisk_calls_sum Total call count.
+# TYPE asterisk_calls_sum counter
+asterisk_calls_sum{eid="00:e0:4c:68:12:85"} 1
+# HELP asterisk_calls_count Current call count.
+# TYPE asterisk_calls_count gauge
+asterisk_calls_count{eid="00:e0:4c:68:12:85"} 0
+# HELP asterisk_endpoints_count Current endpoint count.
+# TYPE asterisk_endpoints_count gauge
+asterisk_endpoints_count{eid="00:e0:4c:68:12:85"} 3
+# HELP asterisk_endpoints_state Individual endpoint states. 0=unknown; 1=offline; 2=online.
+# TYPE asterisk_endpoints_state gauge
+asterisk_endpoints_state{eid="00:e0:4c:68:12:85",id="PJSIP/103",tech="PJSIP",resource="103"} 1
+asterisk_endpoints_state{eid="00:e0:4c:68:12:85",id="PJSIP/102",tech="PJSIP",resource="102"} 2
+asterisk_endpoints_state{eid="00:e0:4c:68:12:85",id="PJSIP/101",tech="PJSIP",resource="101"} 2
+# HELP asterisk_endpoints_channels_count Count of the number of channels currently existing that are associated with the endpoint.
+# TYPE asterisk_endpoints_channels_count gauge
+asterisk_endpoints_channels_count{eid="00:e0:4c:68:12:85",id="PJSIP/103",tech="PJSIP",resource="103"} 0
+asterisk_endpoints_channels_count{eid="00:e0:4c:68:12:85",id="PJSIP/102",tech="PJSIP",resource="102"} 0
+asterisk_endpoints_channels_count{eid="00:e0:4c:68:12:85",id="PJSIP/101",tech="PJSIP",resource="101"} 0
+# HELP asterisk_bridges_count Current bridge count.
+# TYPE asterisk_bridges_count gauge
+asterisk_bridges_count{eid="00:e0:4c:68:12:85"} 0
+# HELP asterisk_core_properties Asterisk instance properties. The value of this will always be 1.
+# TYPE asterisk_core_properties counter
+asterisk_core_properties{eid="00:e0:4c:68:12:85",version="18.11.2",build_options="OPTIONAL_API",build_date="2022-04-28 07:42:40 UTC",build_os="Linux",build_kernel="5.15.12-0-lts",build_host="build-3-16-x86_64"} 1
+# HELP asterisk_core_uptime_seconds Asterisk instance uptime in seconds.
+# TYPE asterisk_core_uptime_seconds counter
+asterisk_core_uptime_seconds{eid="00:e0:4c:68:12:85"} 2532
+# HELP asterisk_core_last_reload_seconds Time since last Asterisk reload in seconds.
+# TYPE asterisk_core_last_reload_seconds counter
+asterisk_core_last_reload_seconds{eid="00:e0:4c:68:12:85"} 2532
+# HELP asterisk_core_scrape_time_ms Total time taken to collect metrics, in milliseconds
+# TYPE asterisk_core_scrape_time_ms counter
+asterisk_core_scrape_time_ms{eid="00:e0:4c:68:12:85"} 0
